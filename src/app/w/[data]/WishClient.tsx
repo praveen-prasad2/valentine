@@ -3,12 +3,12 @@ import React, { useEffect, useState, use } from "react";
 import FloatingHearts from "@/components/FloatingHearts";
 import Confetti from "@/components/Confetti";
 import { decodeData } from "@/lib/utils";
+import RevealWrapper from "@/components/RevealWrapper";
 
 export default function WishClient({ params }: { params: Promise<{ data: string }> }) {
   const resolvedParams = use(params);
   const [wishData, setWishData] = useState<{ n: string; t: string; j: string; m: string; p: string } | null>(null);
   const [hasError, setHasError] = useState(false);
-  const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
     try {
@@ -22,8 +22,8 @@ export default function WishClient({ params }: { params: Promise<{ data: string 
 
   if (hasError) {
     return (
-      <main className="min-h-screen flex items-center justify-center p-6 bg-pink-50">
-        <div className="glass p-10 rounded-3xl text-center max-w-md">
+      <main className="min-h-screen flex items-center justify-center p-6 bg-pink-50 text-center">
+        <div className="glass p-10 rounded-3xl max-w-md border-2 border-white/50">
           <h1 className="text-4xl mb-4">🙊</h1>
           <p className="text-xl font-bold text-accent-pink">Oops! This link seems to be broken or invalid.</p>
         </div>
@@ -44,19 +44,11 @@ export default function WishClient({ params }: { params: Promise<{ data: string 
   };
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-pink-50 to-white overflow-hidden">
-      <FloatingHearts />
-      
-      {!revealed ? (
-        <div 
-          onClick={() => setRevealed(true)}
-          className="z-10 cursor-pointer group flex flex-col items-center animate-bounce-subtle"
-        >
-          <div className="text-[10rem] transition-transform group-hover:scale-110">🎁</div>
-          <h1 className="text-3xl font-bold text-accent-pink mt-4 group-hover:animate-pulse">Click to open your surprise! 💌</h1>
-        </div>
-      ) : (
-        <div className="z-10 w-full max-w-lg glass p-8 md:p-12 rounded-[4rem] shadow-2xl border-8 border-white text-center animate-in zoom-in duration-500 relative">
+    <RevealWrapper>
+      <main className="relative min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-pink-50 to-white overflow-hidden">
+        <FloatingHearts />
+        
+        <div className="z-10 w-full max-w-lg glass p-8 md:p-12 rounded-[4rem] shadow-2xl border-8 border-white text-center relative">
           <Confetti />
           <div className="absolute -top-10 -right-10 text-6xl animate-bounce">🎈</div>
           <div className="absolute -bottom-10 -left-10 text-6xl animate-bounce delay-300">🎀</div>
@@ -88,15 +80,13 @@ export default function WishClient({ params }: { params: Promise<{ data: string 
             <p className="text-sm font-bold text-accent-pink/60">Forever yours</p>
           </div>
         </div>
-      )}
-      
-      {revealed && (
+        
         <p className="mt-12 text-accent-pink/60 font-medium animate-pulse text-center">
           Made with love 🌸 <br />
           <span className="text-xs">Create your own at <span className="underline italic">{typeof window !== 'undefined' ? window.location.origin.replace(/^https?:\/\//, '') : 'our website'}</span></span>
         </p>
-      )}
-    </main>
+      </main>
+    </RevealWrapper>
   );
 }
 

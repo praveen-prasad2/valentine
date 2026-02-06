@@ -5,12 +5,12 @@ const FloatingHearts = () => {
   const [hearts, setHearts] = useState<{ id: number; left: string; size: string; delay: string; duration: string }[]>([]);
 
   useEffect(() => {
-    const newHearts = Array.from({ length: 20 }).map((_, i) => ({
+    const newHearts = Array.from({ length: 15 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
-      size: `${Math.random() * (30 - 10) + 10}px`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${Math.random() * (15 - 10) + 10}s`,
+      size: `${Math.random() * (40 - 20) + 20}px`,
+      delay: `${Math.random() * 10}s`,
+      duration: `${Math.random() * (25 - 15) + 15}s`, // Much slower for calming effect
     }));
     setHearts(newHearts);
   }, []);
@@ -20,7 +20,7 @@ const FloatingHearts = () => {
       {hearts.map((heart) => (
         <div
           key={heart.id}
-          className="absolute bottom-[-20px] text-primary-pink opacity-60 animate-float"
+          className="absolute bottom-[-50px] text-primary-pink/20 animate-float-slow"
           style={{
             left: heart.left,
             fontSize: heart.size,
@@ -36,4 +36,3 @@ const FloatingHearts = () => {
 };
 
 export default FloatingHearts;
-

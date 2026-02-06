@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import FloatingHearts from "@/components/FloatingHearts";
 import { encodeData } from "@/lib/utils";
+import ShareSection from "@/components/ShareSection";
 
 const tones = [
   { id: "sweet", label: "Cute & Sweet", emoji: "🍭", color: "bg-pink-100" },
@@ -133,23 +134,7 @@ function CustomizeForm() {
             Create Shareable Wish 🎁
           </button>
           
-          {shareLink && (
-            <div className="mt-4 p-4 bg-white/50 rounded-2xl border-2 border-dashed border-accent-pink animate-in fade-in slide-in-from-top-4">
-              <p className="text-xs font-bold text-accent-pink mb-2 uppercase">Ready to send!</p>
-              <div className="flex gap-2">
-                <input readOnly value={shareLink} className="flex-1 bg-white px-3 py-2 rounded-xl text-sm border-none outline-none overflow-hidden text-ellipsis" />
-                <button 
-                  onClick={() => {
-                    navigator.clipboard.writeText(shareLink);
-                    alert("Wish link copied! 💖");
-                  }}
-                  className="bg-accent-pink text-white px-4 py-2 rounded-xl text-sm font-bold hover:brightness-110"
-                >
-                  Copy
-                </button>
-              </div>
-            </div>
-          )}
+          {shareLink && <ShareSection url={shareLink} />}
         </div>
       </div>
       

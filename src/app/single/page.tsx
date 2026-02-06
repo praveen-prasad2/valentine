@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import FloatingHearts from "@/components/FloatingHearts";
 import { encodeData } from "@/lib/utils";
+import ShareSection from "@/components/ShareSection";
 
 const styles = [
   { id: "funny", label: "Funny 😄", emoji: "😄", color: "bg-orange-100 border-orange-200" },
@@ -124,27 +125,7 @@ export default function SinglePage() {
               Generate Shareable Link 🚀
             </button>
             
-            {shareLink && (
-              <div className="mt-4 p-4 bg-white/50 rounded-2xl border-2 border-dashed border-accent-pink animate-in fade-in slide-in-from-top-4">
-                <p className="text-xs font-bold text-accent-pink mb-2 uppercase">Your Proposal is Ready!</p>
-                <div className="flex gap-2">
-                  <input 
-                    readOnly 
-                    value={shareLink} 
-                    className="flex-1 bg-white px-3 py-2 rounded-xl text-sm border-none outline-none overflow-hidden text-ellipsis"
-                  />
-                  <button 
-                    onClick={() => {
-                      navigator.clipboard.writeText(shareLink);
-                      alert("Link copied to clipboard! 💖");
-                    }}
-                    className="bg-accent-pink text-white px-4 py-2 rounded-xl text-sm font-bold hover:brightness-110"
-                  >
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
+            {shareLink && <ShareSection url={shareLink} />}
           </div>
         </div>
         
