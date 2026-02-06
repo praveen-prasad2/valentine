@@ -35,6 +35,7 @@ function CustomizeForm() {
   const partnerType = searchParams.get("to") || "partner";
   
   const [name, setName] = useState("");
+  const [senderName, setSenderName] = useState("");
   const [tone, setTone] = useState("sweet");
   const [insideJoke, setInsideJoke] = useState("");
   const [message, setMessage] = useState("");
@@ -47,7 +48,7 @@ function CustomizeForm() {
   };
 
   const generateLink = () => {
-    const data = { n: name, t: tone, j: insideJoke, m: message, p: partnerType, type: "w" }; // type: w for wish
+    const data = { n: name, sn: senderName, t: tone, j: insideJoke, m: message, p: partnerType, type: "w" }; // sn: senderName
     const encoded = encodeData(data);
     const url = `${window.location.origin}/w/${encoded}`;
     setShareLink(url);
@@ -65,6 +66,17 @@ function CustomizeForm() {
         <h2 className="text-3xl font-bold text-accent-pink mb-6">Customize Your Wish {partnerEmoji}</h2>
         
         <div className="space-y-5">
+          <div>
+            <label className="block text-sm font-bold mb-2 ml-1">Your Name</label>
+            <input 
+              type="text" 
+              value={senderName}
+              onChange={(e) => setSenderName(e.target.value)}
+              placeholder="Enter your name..."
+              className="w-full px-4 py-3 rounded-2xl border-2 border-primary-pink/20 focus:border-accent-pink outline-none transition-all"
+            />
+          </div>
+
           <div>
             <label className="block text-sm font-bold mb-2 ml-1">Your {partnerType === 'girlfriend' ? 'Girlfriend' : 'Boyfriend'}'s Name</label>
             <input 
@@ -128,7 +140,7 @@ function CustomizeForm() {
           
           <button 
             onClick={generateLink}
-            disabled={!name || !message}
+            disabled={!name || !message || !senderName}
             className="w-full py-4 bg-accent-pink text-white font-bold rounded-2xl shadow-lg hover:brightness-110 disabled:opacity-50 transition-all"
           >
             Create Shareable Wish 🎁

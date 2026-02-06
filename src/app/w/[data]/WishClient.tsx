@@ -4,10 +4,11 @@ import FloatingHearts from "@/components/FloatingHearts";
 import Confetti from "@/components/Confetti";
 import { decodeData } from "@/lib/utils";
 import RevealWrapper from "@/components/RevealWrapper";
+import ReplySection from "@/components/ReplySection";
 
 export default function WishClient({ params }: { params: Promise<{ data: string }> }) {
   const resolvedParams = use(params);
-  const [wishData, setWishData] = useState<{ n: string; t: string; j: string; m: string; p: string } | null>(null);
+  const [wishData, setWishData] = useState<{ n: string; sn: string; t: string; j: string; m: string; p: string } | null>(null);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -80,6 +81,8 @@ export default function WishClient({ params }: { params: Promise<{ data: string 
             <p className="text-sm font-bold text-accent-pink/60">Forever yours</p>
           </div>
         </div>
+        
+        {wishData.sn && <ReplySection originalSender={wishData.sn} />}
         
         <p className="mt-12 text-accent-pink/60 font-medium animate-pulse text-center">
           Made with love 🌸 <br />

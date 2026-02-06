@@ -4,10 +4,11 @@ import FloatingHearts from "@/components/FloatingHearts";
 import Confetti from "@/components/Confetti";
 import { decodeData } from "@/lib/utils";
 import RevealWrapper from "@/components/RevealWrapper";
+import ReplySection from "@/components/ReplySection";
 
 export default function ProposalClient({ params }: { params: Promise<{ data: string }> }) {
   const resolvedParams = use(params);
-  const [proposalData, setProposalData] = useState<{ n: string; s: string; m: string } | null>(null);
+  const [proposalData, setProposalData] = useState<{ n: string; sn: string; s: string; m: string } | null>(null);
   const [reactions, setReactions] = useState({ love: 0, wow: 0, laugh: 0 });
   const [hasError, setHasError] = useState(false);
 
@@ -103,6 +104,8 @@ export default function ProposalClient({ params }: { params: Promise<{ data: str
             </div>
           </div>
         </div>
+        
+        {proposalData.sn && <ReplySection originalSender={proposalData.sn} />}
         
         <p className="mt-12 text-accent-pink/60 font-medium">
           Create your own proposal at <span className="underline italic">{typeof window !== 'undefined' ? window.location.origin.replace(/^https?:\/\//, '') : 'our website'}</span> 🌸

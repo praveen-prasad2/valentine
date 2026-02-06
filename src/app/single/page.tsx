@@ -34,6 +34,7 @@ const dramaticLines = [
 
 export default function SinglePage() {
   const [name, setName] = useState("");
+  const [senderName, setSenderName] = useState("");
   const [style, setStyle] = useState("romantic");
   const [message, setMessage] = useState("");
   const [shareLink, setShareLink] = useState("");
@@ -48,7 +49,7 @@ export default function SinglePage() {
   };
 
   const generateLink = () => {
-    const data = { n: name, s: style, m: message, t: "p" }; // t: p for proposal
+    const data = { n: name, sn: senderName, s: style, m: message, t: "p" }; // sn: senderName
     const encoded = encodeData(data);
     const url = `${window.location.origin}/p/${encoded}`;
     setShareLink(url);
@@ -67,6 +68,17 @@ export default function SinglePage() {
           <h2 className="text-3xl font-bold text-accent-pink mb-6">Create Your Proposal 💌</h2>
           
           <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-bold mb-2 ml-1">Your Name</label>
+              <input 
+                type="text" 
+                value={senderName}
+                onChange={(e) => setSenderName(e.target.value)}
+                placeholder="Enter your name..."
+                className="w-full px-4 py-3 rounded-2xl border-2 border-primary-pink/20 focus:border-accent-pink outline-none transition-all"
+              />
+            </div>
+
             <div>
               <label className="block text-sm font-bold mb-2 ml-1">Your Crush's Name</label>
               <input 
@@ -119,7 +131,7 @@ export default function SinglePage() {
             
             <button 
               onClick={generateLink}
-              disabled={!name || !message}
+              disabled={!name || !message || !senderName}
               className="w-full py-4 bg-accent-pink text-white font-bold rounded-2xl shadow-lg hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               Generate Shareable Link 🚀

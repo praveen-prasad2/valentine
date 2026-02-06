@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
-import MusicPlayer from "@/components/MusicPlayer";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -23,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${quicksand.variable} font-sans antialiased bg-background text-foreground`}>
         {children}
-        <MusicPlayer />
       </body>
     </html>
   );
