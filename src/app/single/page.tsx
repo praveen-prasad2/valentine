@@ -49,7 +49,7 @@ export default function SinglePage() {
   const generateLink = () => {
     const data = { n: name, s: style, m: message, t: "p" }; // t: p for proposal
     const encoded = encodeData(data);
-    const url = `${window.location.origin}/proposal/${encoded}`;
+    const url = `${window.location.origin}/p/${encoded}`;
     setShareLink(url);
   };
 

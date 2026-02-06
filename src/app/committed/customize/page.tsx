@@ -48,7 +48,7 @@ function CustomizeForm() {
   const generateLink = () => {
     const data = { n: name, t: tone, j: insideJoke, m: message, p: partnerType, type: "w" }; // type: w for wish
     const encoded = encodeData(data);
-    const url = `${window.location.origin}/wish/${encoded}`;
+    const url = `${window.location.origin}/w/${encoded}`;
     setShareLink(url);
   };
 

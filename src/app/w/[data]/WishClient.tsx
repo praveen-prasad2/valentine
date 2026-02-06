@@ -91,8 +91,9 @@ export default function WishClient({ params }: { params: Promise<{ data: string 
       )}
       
       {revealed && (
-        <p className="mt-12 text-accent-pink/60 font-medium animate-pulse">
-          Made with love 🌸
+        <p className="mt-12 text-accent-pink/60 font-medium animate-pulse text-center">
+          Made with love 🌸 <br />
+          <span className="text-xs">Create your own at <span className="underline italic">{typeof window !== 'undefined' ? window.location.origin.replace(/^https?:\/\//, '') : 'our website'}</span></span>
         </p>
       )}
     </main>

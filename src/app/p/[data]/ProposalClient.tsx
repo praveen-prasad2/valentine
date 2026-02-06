@@ -103,7 +103,7 @@ export default function ProposalClient({ params }: { params: Promise<{ data: str
       </div>
       
       <p className="mt-12 text-accent-pink/60 font-medium">
-        Create your own proposal at <span className="underline italic">valentine-magic.com</span> 🌸
+        Create your own proposal at <span className="underline italic">{typeof window !== 'undefined' ? window.location.origin.replace(/^https?:\/\//, '') : 'our website'}</span> 🌸
       </p>
     </main>
   );
