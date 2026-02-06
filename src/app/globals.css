@@ -49,13 +49,14 @@ body {
   animation: heart-burst 0.8s ease-out forwards;
 }
 
-@keyframes float-slow {
-  0% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
-  100% { transform: translateY(-100vh) rotate(180deg); opacity: 0; }
+@keyframes music-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 111, 146, 0.4); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(251, 111, 146, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 111, 146, 0); }
 }
 
-.animate-float-slow {
-  animation: float-slow 15s linear infinite;
+.animate-music-pulse {
+  animation: music-pulse 2s infinite;
 }
 
 .glass {
