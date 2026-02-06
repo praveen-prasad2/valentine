@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import WishClient from "./WishClient";
+import { decodeData } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ data: string }>;
@@ -8,7 +9,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   try {
-    const decoded = JSON.parse(Buffer.from(resolvedParams.data, 'base64').toString('utf8'));
+    const decoded = decodeData(resolvedParams.data);
     return {
       title: `Valentine Wish for ${decoded.n} 🎁`,
       description: `A special Valentine's surprise for ${decoded.n}. Open to see!`,

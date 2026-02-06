@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import FloatingHearts from "@/components/FloatingHearts";
+import { encodeData } from "@/lib/utils";
 
 const styles = [
   { id: "funny", label: "Funny 😄", emoji: "😄", color: "bg-orange-100 border-orange-200" },
@@ -47,7 +48,7 @@ export default function SinglePage() {
 
   const generateLink = () => {
     const data = { n: name, s: style, m: message, t: "p" }; // t: p for proposal
-    const encoded = btoa(JSON.stringify(data));
+    const encoded = encodeData(data);
     const url = `${window.location.origin}/proposal/${encoded}`;
     setShareLink(url);
   };

@@ -2,6 +2,7 @@
 import React, { useEffect, useState, use } from "react";
 import FloatingHearts from "@/components/FloatingHearts";
 import Confetti from "@/components/Confetti";
+import { decodeData } from "@/lib/utils";
 
 export default function ProposalClient({ params }: { params: Promise<{ data: string }> }) {
   const resolvedParams = use(params);
@@ -11,7 +12,7 @@ export default function ProposalClient({ params }: { params: Promise<{ data: str
 
   useEffect(() => {
     try {
-      const decoded = JSON.parse(atob(resolvedParams.data));
+      const decoded = decodeData(resolvedParams.data);
       setProposalData(decoded);
     } catch (e) {
       console.error("Failed to decode proposal data", e);

@@ -3,6 +3,7 @@ import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import FloatingHearts from "@/components/FloatingHearts";
+import { encodeData } from "@/lib/utils";
 
 const tones = [
   { id: "sweet", label: "Cute & Sweet", emoji: "🍭", color: "bg-pink-100" },
@@ -46,7 +47,7 @@ function CustomizeForm() {
 
   const generateLink = () => {
     const data = { n: name, t: tone, j: insideJoke, m: message, p: partnerType, type: "w" }; // type: w for wish
-    const encoded = btoa(JSON.stringify(data));
+    const encoded = encodeData(data);
     const url = `${window.location.origin}/wish/${encoded}`;
     setShareLink(url);
   };
